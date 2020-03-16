@@ -1,0 +1,52 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Login</title>
+</head>
+
+
+  {% if form.errors %}
+      <div class="alert alert-danger" style="text-align:center;width:100%" >Your username and password didn't match. Please try again.</div>
+  {% endif %}
+    
+  {% if next %}  
+      {% if user.is_authenticated %}
+      <div class="btn btn-danger" style="text-align:center; width:100%" >Your account doesn't have access to this page. To proceed,
+        please login with an account that has access.</div>
+      {% else %}
+      <div class="btn btn-info" style="text-align:center; width:100%" >Please login to see this page.</div>
+  {% endif %}
+
+  {% endif %}
+  <br><br><br><br><br><br><br><br><br><br><br><br>
+  <div align="center">
+    <h2>Login</h2>
+    <br>
+    <form method="post" action="{% url 'login' %}">
+      {% csrf_token %}
+      <table align="center">
+        <tr>
+          <td>{{ form.username.label_tag }}</td>
+          <td>{{ form.username }}</td>
+        </tr>
+        <tr>
+          <td>{{ form.password.label_tag }}</td>
+          <td>{{ form.password }}</td>
+        </tr>
+      </table>
+      <br>
+      <button class="btn btn-outline-primary" style="background-color: rgb(223, 240, 255);" type="submit">Sign in</button>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <br>
+      <br>
+      <p>Don't have an account?</p>
+      <a  style="color: rgb(65, 63, 63); background-color: rgb(223, 240, 255);" class="btn btn-outline-primary" href="{% url 'register'  %}">Sign up</a>
+    </form>
+  </div>
+
+</html>
+{% endblock %}

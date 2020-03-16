@@ -1,0 +1,22 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Login</title>
+</head>
+<body>
+  <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  <div align="center">
+    <h3>Logged out!</h3>  
+    <h4>Log in again ??</h4><br><br>
+    <div>
+      <button style="background-color: rgb(223, 240, 255);" class="btn btn-lg btn-outline-secondary" onclick="window.location.href='{% url "login"  %}'">Sign in</button>
+      <button style="background-color: rgb(223, 240, 255);" class="btn btn-lg btn-outline-primary" onclick="window.location.href='{% url "index"  %}'">Home</button>
+     </div>
+  </div>
+</body>
+
+{% endblock %}
