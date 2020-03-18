@@ -16,8 +16,8 @@ def index(request):
 
 def allPosts(request):
     allPosts = Post.objects.order_by('-timestamp')
+    paginator = Paginator(allPosts, 5)
     page = request.GET.get('page', 1)
-    paginator = Paginator(allPosts, 10)
     try:
         posts = paginator.page(page)
     except PageNotAnInteger:
@@ -25,13 +25,13 @@ def allPosts(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     
-    return render(request, 'blogs/posts_list.html', {'posts': posts})
+    return render(request, 'blogs/posts_list.html', {'page': page, 'posts': posts})
     
 
 def viewPost(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     if not PostHits.objects.filter(post=post, session=request.session.session_key) :
-        view = PostHits(post=post, ip=request.META['REMOTE_ADDR'], created=timezone.now(), session=request.session.session_key)
+        view = PostHits(post=post, ip=request.META['REMOTE_ADDR'], timestamp=timezone.now(), session=request.session.session_key)
         view.save()
         post.increase()
     comments = post.comments.filter(active=True)
