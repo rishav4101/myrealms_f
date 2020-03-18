@@ -25,7 +25,7 @@ def allPosts(request):
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
     
-    return render(request, 'core/posts_list.html', {'posts': posts})
+    return render(request, 'blogs/posts_list.html', {'posts': posts})
     
 
 def viewPost(request, post_id):
@@ -44,8 +44,37 @@ def viewPost(request, post_id):
                 return redirect('login')
             new_comment = comment_form.save(commit=False)
             new_comment.post = post
-            new_comment.username = request.user
+            new_comment.name = request.user
             new_comment.created_on = timezone.now()
             new_comment.active = True
             new_comment = comment_form.save()
     return render(request, 'blogs/post.html', {'post':post, 'comments':comments, 'new_comment':new_comment, 'comment_form':comment_form})
+
+@login_required
+def update_post(request, post_id):
+    instance = get_object_or_404(Post, id=post_id)
+    form = PostForm(request.POST or None, instance=instance)
+    if request.method == 'POST':
+        if form.is_valid and instance.name.pk == request.user.pk :
+            post = form.save(user_id=request.user.pk)
+            return redirect('view_post', post.id)
+    return render(request, 'blogs/postForm.html', {'form': form})
+
+@login_required
+def delete_comment(request, comment_id):
+    instance = get_object_or_404(Comment, id=comment_id)
+    post_id = instance.post.id
+    if instance.name.pk == request.user.pk:
+        instance.delete()
+    return redirect('view_post', post_id)
+
+@login_required
+def update_comment(request, comment_id):
+    instance = get_object_or_404(Comment,id=comment_id)
+    post_id = instance.post.id
+    form = CommentForm(request.POST or None, instance=instance)
+    if request.method == "POST":
+        if instance.name.pk == request.user.pk:
+            form.save()
+            return redirect('view_post', post_id=post_id)
+    return render(request, 'blogs/commentForm.html', {'form': form})

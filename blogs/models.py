@@ -4,6 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 
 class Post(models.Model):
+    title = models.CharField(max_length=50)
     body = models.CharField(max_length=400)
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery/')

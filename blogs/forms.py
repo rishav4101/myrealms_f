@@ -6,7 +6,7 @@ class PostForm(ModelForm):
     
     class Meta:
         model = Post
-        fields = ('body','image')
+        fields = ('title','body','image')
         widgets = {
             'body': Textarea(attrs={'rows':5}),
         }
