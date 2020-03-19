@@ -5,6 +5,7 @@ from accounts.views import *
 from . import settings
 from django.contrib.staticfiles.urls import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf.urls import url
 
 
 urlpatterns = [
@@ -21,6 +22,8 @@ urlpatterns = [
     path('accounts/logout/', logout_view,{ 'template_name': 'registration/logout.html',}, name='logout'),
 
     path('logged_out/', logged_out, name='logged_out'),
+
+    url(r'^oauth/', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
