@@ -4,4 +4,4 @@ from .models import *
 admin.site.register(Post)
 admin.site.register(Comment)
 admin.site.register(PostHits)
-
+admin.site.register(Contact)

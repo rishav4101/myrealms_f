@@ -9,11 +9,12 @@ class Post(models.Model):
     name = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='gallery/')
     active = models.BooleanField(default=False)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     hits = models.IntegerField(default=0)
+    created_by = models.CharField(max_length=200)
 
     def __str__(self):
-        return str('post by {} on {}'.format(self.name, self.timestamp))
+        return str('post by {} on {}'.format(self.created_by, self.created_at))
 
     def increase(self):
         self.hits += 1
@@ -27,8 +28,8 @@ class PostHits(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
-    body = models.CharField(max_length=100)
-    timestamp = models.DateTimeField(auto_now_add=True)
+    body = models.CharField(max_length=1000)
+    created_at = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
     name = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -37,3 +38,10 @@ class Comment(models.Model):
 
     def __str__(self):
         return "Comment {} by {}".format(self.body, self.name)
+
+class Contact(models.Model):
+    email = models.EmailField(null=False)
+    name = models.CharField(max_length=200,null=False)
+    query = models.CharField(max_length=500)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    replied = models.BooleanField(default=False)
