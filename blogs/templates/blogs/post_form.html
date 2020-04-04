@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
-    {% load static %}
-    {% load widget_tweaks %}
+{% load static %}
+{% load widget_tweaks %}
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -25,9 +25,9 @@
 </head>
 
 <body>
-    <div class="header-dark" style="background-color: #240f3e;color: #a4b3b6;height: auto;margin: 61px 0px 0px;">
+    <div class="header-dark" style="background-color: #240f3e;color: #a4b3b6;height: auto;margin: 61px 0px 50px;">
         <nav class="navbar navbar-light navbar-expand-md navigation-clean fixed-top" style="background-color: #240f3e;">
-            <div class="container"><a class="navbar-brand" href="#">My Realms</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="container"><a class="navbar-brand" href="#">MyRealms</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse"
                     id="navcol-1">
                     <ul class="nav navbar-nav ml-auto">
@@ -44,44 +44,33 @@
             </div>
         </nav>
         <div class="container hero">
-            <div class="row text-center">
-                <div class="col-md-8 offset-md-2 text-center">
-                    <h1 class="text-center">{{post.title}}</h1>
+            <div class="row">
+                <div class="col-md-8 offset-md-2">
+                    <h1 class="text-center">My Realms</h1>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="text-left" style="margin: 50px 0px 0px ;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 style="font-family: 'Fira Sans Extra Condensed', sans-serif;">All our posts are here&nbsp;</h3>
-                    {% for post in posts %}
-                        <div class="card" style="margin: 0px 0px 20px;background-color: #16182c;">
-                            <div class="card-body">
-                                <h4 class="card-title" style="font-family: Raleway, sans-serif;" ><a href="{% url 'view_post' post.id %}">{{post.title}}</a></h4>
-                                <h6 class="card-subtitle mb-2" style="color: #d83f87;font-size: 15px;font-family: 'Fira Sans Extra Condensed', sans-serif;">Posted by {{post.created_by}} at {{post.created_at}}</h6>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    {% if posts.has_other_pages %}
-                    <div class="container-fluid btn-group">
-                        <nav aria-label="Page navigation conatiner"></nav>
-                            <ul class="pagination justify-content-center">
-                                {% if posts.has_previous %}
-                                    <li><a class="btn" role="button" style="background-color: #d83f87;color: #ffffff;" href="?page={{ posts.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
-                                {% endif %}
-                                {% if posts.has_next %}
-                                    <li><a class="btn" role="button" style="background-color: #d83f87;color: #ffffff;margin: 0px 0px 0px 3px;" href="?page={{ posts.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
-                                {% endif %}
-                            </ul>
-                        </nav>
-                    </div>
-                    {% endif %}
-                </div>
+    <div class="container">
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label>Post Title</label>
+                {% render_field form.title class="form-control" type="text" %}
             </div>
-        </div>
+            <div class="form-group">
+                <label>Created By&nbsp;</label>
+                {% render_field form.created_by class="form-control" type="text" %}
+            </div>
+            <div class="form-group">
+                <label>Image</label>
+                {% render_field form.image type="file" style="margin: 0px 20px 0px;" %}
+            </div>
+            <div class="form-group">
+                <label>Body</label>
+                {% render_field form.body type="textarea" class="form-control" %}
+            </div>
+        </form>
     </div>
     <div class="footer-dark" style="background-color: #151515;margin: 40px 0px 0px;">
         <footer>
@@ -114,5 +103,6 @@
     </div>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    </body>
+</body>
+
 </html>

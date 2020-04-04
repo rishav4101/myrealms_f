@@ -8,6 +8,8 @@ from django.contrib.auth import login, authenticate,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib import messages
+
 
 def index(request):
     posts = Post.objects.order_by('-created_at')[:5]
@@ -79,18 +81,19 @@ def delete_comment(request, comment_id):
     post_id = instance.post.id
     if instance.name.pk == request.user.pk:
         instance.delete()
+        messages.warning(request, "Deleted Comment Successfully")
     return redirect('view_post', post_id)
 
 @login_required
 def update_comment(request, comment_id):
     instance = get_object_or_404(Comment,id=comment_id)
-    post_id = instance.post.id
+    post = get_object_or_404(Post, id=instance.post.id)
     form = CommentForm(request.POST or None, instance=instance)
     if request.method == "POST":
-        if instance.name.pk == request.user.pk:
+        if form.is_valid() and instance.name.pk == request.user.pk:
             form.save()
-            return redirect('view_post', post_id=post_id)
-    return render(request, 'blogs/commentForm.html', {'form': form})
+            return redirect('view_post', post_id=post.id)
+    return render(request, 'blogs/comment_form.html', {'form': form, 'post_id':post.id})
 
 @login_required
 def delete_comment(request, comment_id):

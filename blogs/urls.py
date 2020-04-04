@@ -9,7 +9,7 @@ urlpatterns = [
 
     path('contact_us/', contact, name='contact'),
 
-    path('allPosts', allPosts, name='allPosts'),
+    path('allPosts', allPosts, name='all_posts'),
     
     path('allPosts/post/<int:post_id>/', view_post, name='view_post' ),
 

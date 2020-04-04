@@ -21,6 +21,7 @@ class UserLoginForm(forms.Form):
 
 class UserRegisterForm(forms.ModelForm):
     username = forms.CharField(max_length=20)
+    email = forms.EmailField()
     password = forms.CharField(widget=forms.PasswordInput)
     password1 = forms.CharField(widget=forms.PasswordInput, label='Verify password')
 
@@ -28,6 +29,7 @@ class UserRegisterForm(forms.ModelForm):
         model = User
         fields = [
             'username',
+            'email',
             'password',
             'password1',
         ]
@@ -35,11 +37,15 @@ class UserRegisterForm(forms.ModelForm):
 
     def clean(self, *args, **kwargs):
         username = self.cleaned_data.get('username')
+        email = self.cleaned_data.get('email')
         password = self.cleaned_data.get('password')
         password1 = self.cleaned_data.get('password1')
         if password != password1:
             raise forms.ValidationError("Passwords must match")
         username_qs = User.objects.filter(username=username)
+        email_qs = User.objects.filter(email=email)
         if username_qs.exists():
             raise forms.ValidationError("Username is already taken")
+        if email_qs.exists():
+            raise forms.ValidationError("Email is already taken")
         return super(UserRegisterForm, self).clean(*args, **kwargs)

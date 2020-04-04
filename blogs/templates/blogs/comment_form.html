@@ -22,19 +22,20 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/3.3.1/css/swiper.min.css">
     <link rel="stylesheet" href="{% static 'css/Navigation-Clean.css' %}">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 </head>
 
 <body>
-    <div class="header-dark" style="background-color: #240f3e;color: #a4b3b6;height: auto;margin: 61px 0px 0px;">
+    <div class="header-dark" style="background-color: #240f3e;color: #a4b3b6;height: auto;margin: 61px 0px 40px;">
         <nav class="navbar navbar-light navbar-expand-md navigation-clean fixed-top" style="background-color: #240f3e;">
             <div class="container"><a class="navbar-brand" href="#">My Realms</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse"
                     id="navcol-1">
                     <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'about' %}" style="color: rgb(156,156,156);">About Us</a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'contact' %}" style="color: rgb(156,156,156);">Contact Us</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link  " href="{% url 'about' %}" style="color: rgb(156,156,156);">About Us</a></li>
+                        <li class="nav-item" role="presentation"><a class="nav-link  " href="{% url 'contact' %}" style="color: rgb(156,156,156);">Contact Us</a></li>
                         {% if not user.is_authenticated %}
-                            <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'login' %}" style="color: rgb(156,156,156);">LOGIN</a></li>
+                            <li class="nav-item" role="presentation"><a class="nav-link  " href="{% url 'login' %}" style="color: rgb(156,156,156);">LOGIN</a></li>
                         {% else %}
                             <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'logout' %}" style="color: rgb(156,156,156);">LOGOUT</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="#" style="color: rgb(156,156,156);">SIGNED IN as {{user.username}} </a></li>
@@ -46,40 +47,23 @@
         <div class="container hero">
             <div class="row text-center">
                 <div class="col-md-8 offset-md-2 text-center">
-                    <h1 class="text-center">{{post.title}}</h1>
+                    <h1 class="text-center">Edit your Comment</h1>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="text-left" style="margin: 50px 0px 0px ;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 style="font-family: 'Fira Sans Extra Condensed', sans-serif;">All our posts are here&nbsp;</h3>
-                    {% for post in posts %}
-                        <div class="card" style="margin: 0px 0px 20px;background-color: #16182c;">
-                            <div class="card-body">
-                                <h4 class="card-title" style="font-family: Raleway, sans-serif;" ><a href="{% url 'view_post' post.id %}">{{post.title}}</a></h4>
-                                <h6 class="card-subtitle mb-2" style="color: #d83f87;font-size: 15px;font-family: 'Fira Sans Extra Condensed', sans-serif;">Posted by {{post.created_by}} at {{post.created_at}}</h6>
-                            </div>
-                        </div>
-                    {% endfor %}
-                    {% if posts.has_other_pages %}
-                    <div class="container-fluid btn-group">
-                        <nav aria-label="Page navigation conatiner"></nav>
-                            <ul class="pagination justify-content-center">
-                                {% if posts.has_previous %}
-                                    <li><a class="btn" role="button" style="background-color: #d83f87;color: #ffffff;" href="?page={{ posts.previous_page_number }}" class="page-link">&laquo; PREV</a></li>
-                                {% endif %}
-                                {% if posts.has_next %}
-                                    <li><a class="btn" role="button" style="background-color: #d83f87;color: #ffffff;margin: 0px 0px 0px 3px;" href="?page={{ posts.next_page_number }}" class="page-link">NEXT &raquo;</a></li>
-                                {% endif %}
-                            </ul>
-                        </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <form method="post" >
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label style="font-size: 18px;font-family: 'Fira Sans Extra Condensed', sans-serif;">Edit your comment</label>
+                        {% render_field form.body type="textarea" class="form-control" %}
+                        <button class="btn" type="submit" style="background-color: #dc468c;color: rgb(255,255,255);margin: 10px 0px 0px;">Save</button>
+                        <a class="btn" role="button" style="background-color: #dc468c;color: rgb(255,255,255);margin: 10px 10px 0px;" href="{% url 'view_post' post_id %}">Cancel</a>
                     </div>
-                    {% endif %}
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -114,5 +98,6 @@
     </div>
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-    </body>
+</body>
+
 </html>

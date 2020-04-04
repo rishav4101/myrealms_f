@@ -18,10 +18,13 @@ class PostForm(ModelForm):
             form.save()
             return form
 
-class CommentForm(forms.Form):
+class CommentForm(ModelForm):
     class Meta:
         model = Comment
         fields = ('body',)
+        widgets = {
+            'body': Textarea(attrs={'rows':3}),
+        }
 
 
 class ContactForm(forms.Form):
