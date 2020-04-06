@@ -3,7 +3,12 @@ from django.utils import timezone
 from django.conf import settings 
 from django.contrib.auth.models import User
 
+
+class Category(models.Model):
+    name = models.CharField(max_length=20)
+
 class Post(models.Model):
+    category = models.ForeingKey(Category, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
     body = models.TextField(max_length=10000)
     name = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -13,6 +18,7 @@ class Post(models.Model):
     hits = models.IntegerField(default=0)
     created_by = models.CharField(max_length=200)
     featured = models.BooleanField(default=False)
+    
 
     def __str__(self):
         return str('{} by {} on {}'.format(self.title, self.created_by, self.created_at))
