@@ -32,6 +32,7 @@
                 <div class="collapse navbar-collapse"
                     id="navcol-1">
                     <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'all_posts' %}" style="color: rgb(156,156,156);">Blog</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link  " href="{% url 'about' %}" style="color: rgb(156,156,156);">About Us</a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link  " href="{% url 'contact' %}" style="color: rgb(156,156,156);">Contact Us</a></li>
                         {% if not user.is_authenticated %}

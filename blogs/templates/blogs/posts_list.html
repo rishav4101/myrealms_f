@@ -57,6 +57,9 @@
             <div class="row">
                 <div class="col-md-12">
                     <h3 style="font-family: 'Fira Sans Extra Condensed', sans-serif;">All our posts are here&nbsp;</h3>
+                    <ul style="color: rgb(255,0,0);">
+                        <li class="text-capitalize text-left" style="color: #ea1b7c;font-size: 18px;font-family: 'Fira Sans Extra Condensed', sans-serif;font-weight: 800;font-style: normal;width: 150px;"><a href="{% url 'featured' %}">View Featured&nbsp;&nbsp;</a>></li>
+                    </ul>
                     {% for post in posts %}
                         <div class="card" style="margin: 0px 0px 20px;background-color: #16182c;">
                             <div class="card-body">

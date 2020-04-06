@@ -12,9 +12,10 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     hits = models.IntegerField(default=0)
     created_by = models.CharField(max_length=200)
+    featured = models.BooleanField(default=False)
 
     def __str__(self):
-        return str('post by {} on {}'.format(self.created_by, self.created_at))
+        return str('{} by {} on {}'.format(self.title, self.created_by, self.created_at))
 
     def increase(self):
         self.hits += 1

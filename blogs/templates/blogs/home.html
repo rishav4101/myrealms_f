@@ -30,6 +30,7 @@
                 <div class="container"><a class="navbar-brand" href="#">My Realms</a><button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navcol-1">
                         <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'all_posts' %}" style="color: rgb(156,156,156);">Blog</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="{% url 'about' %}" style="color: rgb(156,156,156);">About Us</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link " href="{% url 'contact' %}" style="color: rgb(156,156,156);">Contact Us</a></li>
                             {% if not user.is_authenticated %}
@@ -48,28 +49,6 @@
                         <h1 class="text-center">My Realms</h1>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="card" style="background-color: #16182c;margin: 40px 0px 1px;">
-        <div class="card-body text-nowrap" style="background-size: cover;background-repeat: no-repeat;">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <h4 style="font-family: Oswald, sans-serif;color: rgb(255,255,255);font-size: 40px;">Posts</h4>
-                        <ul style="color: rgb(255,0,0);">
-                            <li class="text-capitalize text-left" style="color: #ea1b7c;font-size: 18px;font-family: 'Fira Sans Extra Condensed', sans-serif;font-weight: 800;font-style: normal;width: 150px;"><a href="{% url 'all_posts' %}">View more articles</a>></li>
-                        </ul>
-                    </div>
-                </div>
-                {% for post in posts %}
-                <div class="row">
-                    <div class="col" style="margin: 50px 10px 0px ;"><img style="margin: 0px 0px 20px;" width="250px" height="250px" src="{{ post.image.url }}">
-                        <h4 style="color: rgb(255,255,255);font-family: Raleway, sans-serif;font-weight: bold;font-size: 32px;">{{post.title}}</h4>
-                        <p style="font-size: 18px;font-weight: bold;font-family: 'Fira Sans Extra Condensed', sans-serif;color: #ea1b7c;"><a href="{% url 'view_post' post.id %}">Read More</p>
-                    </div>
-                </div>
-                {% endfor %}
             </div>
         </div>
     </div>

@@ -11,6 +11,8 @@ urlpatterns = [
 
     path('allPosts', allPosts, name='all_posts'),
     
+    path('allposts/featured', featured, name='featured'),
+    
     path('allPosts/post/<int:post_id>/', view_post, name='view_post' ),
 
     path('allPosts/post/create', add_post, name='add_post' ),

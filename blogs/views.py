@@ -12,8 +12,7 @@ from django.contrib import messages
 
 
 def index(request):
-    posts = Post.objects.order_by('-created_at')[:5]
-    return render(request, 'blogs/home.html', {'posts': posts})
+    return render(request, 'blogs/home.html')
 
 def about(request):
     return render(request, 'blogs/about_us.html')
@@ -30,6 +29,10 @@ def allPosts(request):
         posts = paginator.page(paginator.num_pages)
     
     return render(request, 'blogs/posts_list.html', {'page': page, 'posts': posts})
+
+def featured(request):
+    posts = Post.objects.filter(featured=True).order_by('-created_at')[:6]
+    return render(request, 'blogs/featured_posts.html', {'posts': posts})
 
 def view_post(request, post_id):
     post = get_object_or_404(Post, id=post_id)
