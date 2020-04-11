@@ -3,29 +3,40 @@ from django.utils import timezone
 from django.conf import settings 
 from django.contrib.auth.models import User
 
+class CategoryField(models.CharField):
+    def __init__(self, *args, **kwargs):
+        super (CategoryField, self).__init__(*args, **kwargs)
+    def get_prep_value(self, value):
+        return str(value).upper()
 
 class Category(models.Model):
-    name = models.CharField(max_length=20)
-
-class Post(models.Model):
-    category = models.ForeingKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=50)
-    body = models.TextField(max_length=10000)
-    name = models.ForeignKey(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='gallery/')
-    active = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-    hits = models.IntegerField(default=0)
-    created_by = models.CharField(max_length=200)
-    featured = models.BooleanField(default=False)
-    
+    name = CategoryField(max_length=20)
 
     def __str__(self):
-        return str('{} by {} on {}'.format(self.title, self.created_by, self.created_at))
+        return str(self.name)
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    body = models.TextField(max_length=10000)
+    image = models.ImageField(upload_to='gallery/')
+    active = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    views = models.IntegerField(default=0)
+    created_by = models.CharField(max_length=200)
+    featured = models.BooleanField(default=False)
+    category1 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category1')
+    category2 = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category2')
+
+    def __str__(self):
+        return str('{} by {} on {}'.format(self.title, self.created_by, self.timestamp))
 
     def increase(self):
-        self.hits += 1
+        self.views += 1
         self.save()
+    
+    class Meta:
+        ordering = ['-timestamp']
+    
 
 class PostHits(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
@@ -36,19 +47,13 @@ class PostHits(models.Model):
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     body = models.TextField(max_length=1000)
-    created_at = models.DateTimeField(auto_now_add=True)
+    timestamp = models.DateTimeField(auto_now_add=True)
     active = models.BooleanField(default=True)
-    name = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    email = models.EmailField()
 
     class Meta:
-        ordering = ['created_at']
+        ordering = ['-timestamp']
 
     def __str__(self):
-        return "Comment {} by {}".format(self.body, self.name)
-
-class Contact(models.Model):
-    email = models.EmailField(null=False)
-    name = models.CharField(max_length=200,null=False)
-    query = models.CharField(max_length=500)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    replied = models.BooleanField(default=False)
+        return "Commented on post by {}".format(self.post.title, self.name)

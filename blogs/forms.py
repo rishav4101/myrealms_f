@@ -21,19 +21,9 @@ class PostForm(ModelForm):
 class CommentForm(ModelForm):
     class Meta:
         model = Comment
-        fields = ('body',)
+        fields = ('body', 'name', 'email')
         widgets = {
             'body': Textarea(attrs={'rows':3}),
         }
 
 
-class ContactForm(forms.Form):
-    class Meta: 
-        model = Contact
-        exclude = ('user', 'replied')
-
-    def save(self, user_id):
-        form = super(ContactForm, self)
-        form.user = User.objects.get(pk=user_id)
-        form.save()
-        return form

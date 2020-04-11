@@ -7,20 +7,10 @@ urlpatterns = [
 
     path('about', about, name='about'),
 
-    path('contact_us/', contact, name='contact'),
+    path('team', team, name='team'),
 
     path('allPosts', allPosts, name='all_posts'),
     
-    path('allposts/featured', featured, name='featured'),
-    
     path('allPosts/post/<int:post_id>/', view_post, name='view_post' ),
-
-    path('allPosts/post/create', add_post, name='add_post' ),
-
-    path('allPosts/post/update/<int:post_id>/', update_post, name='update_post' ),
-
-    path('allPosts/comement/update/<int:comment_id>/', update_comment, name='update_comment' ),
-
-    path('allPosts/comement/delete/<int:comment_id>/', delete_comment, name='delete_comment' ),
 
 ]

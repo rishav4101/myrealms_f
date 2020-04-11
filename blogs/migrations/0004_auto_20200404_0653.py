@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AlterModelOptions(
             name='comment',
-            options={'ordering': ['created_at']},
+            options={'ordering': ['timestamp']},
         ),
         migrations.RenameField(
             model_name='comment',
