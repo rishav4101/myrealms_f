@@ -35,7 +35,7 @@
          <div class="row align-items-center">
             <div class="col-lg-12">
                <nav class="navbar navbar-expand-lg navbar-light">
-                  <a class="navbar-brand" href="{% url 'index' %}"> <img src="{% static 'img/Untitled 50.png' %}" alt="logo"> </a>
+                  <a class="navbar-brand" href="{% url 'index' %}"> <img src="{% static 'img/my realms_50.png' %}" alt="logo"> </a>
                   <button class="navbar-toggler" type="button" data-toggle="collapse"
                      data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                      aria-label="Toggle navigation">
@@ -51,7 +51,7 @@
                            <a class="nav-link" href="{% url 'about' %}">About</a>
                         </li>
                         <li class="nav-item">
-                           <a class="nav-link" href="{url 'all_posts' }">Blog</a>
+                           <a class="nav-link" href="{% url 'all_posts' %}">Blog</a>
                         </li>
                         <li class="nav-item">
                            <a class="nav-link" href="{% url 'team' %}">Team</a>
@@ -118,8 +118,8 @@
                   <div class="blog_details">
                      <h2>{{post.title}}</h2>
                      <ul class="blog-info-link mt-3 mb-4">
-                        <li><a><i class="far fa-user"></i> {{post.category1}},{{post.category2}} </a></li>
-                        <li><a href="#"><i class="far fa-comments"></i>{{comments.count}}  Comments</a></li>
+                        <li><a><i class="far "></i> {{post.category1}},{{post.category2}} </a></li>
+                        <li><a href="#"><i class="far "></i>{{comments.count}}  Comments</a></li>
                      </ul>
                      <div class="quote-wrapper">
                      <p> {{post.body|linebreaks}} </p>
@@ -145,12 +145,10 @@
                         {% if prev %}
                         <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                            <div class="thumb">
-                              <a href="#">
-                                 <img class="img-fluid" src="{{prev.image.url}}" alt="">
-                              </a>
+                             
                            </div>
                            <div class="arrow">
-                              <a href="#">
+                              <a href="{% url 'view_post' prev.id %}">
                                  <span class="lnr text-white ti-arrow-left"></span>
                               </a>
                            </div>
@@ -164,22 +162,22 @@
                         {% endif %}
                         {% if next %}
                         <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                           <div class="thumb">
+                              
+                           </div>
+                           <div class="arrow">
+                              <a href="{% url 'view_post' next.id %}">
+                                 <span class="lnr text-white ti-arrow-right"></span>
+                              </a>
+                           </div>
                            <div class="detials">
                               <p>Next Post</p>
                               <a href="{% url 'view_post' next.id %}">
                                  <h4>{{next.title}}</h4>
                               </a>
                            </div>
-                           <div class="arrow">
-                              <a href="#">
-                                 <span class="lnr text-white ti-arrow-right"></span>
-                              </a>
-                           </div>
-                           <div class="thumb">
-                              <a href="#">
-                                 <img class="img-fluid" src="{{next.image.url}}" alt="">
-                              </a>
-                           </div>
+                           
+                           
                         </div>
                         {% endif %}
                      </div>
@@ -437,61 +435,67 @@
 
    <!-- footer part start-->
    <footer class="footer-area">
-      <div class="container">
-         <div class="row justify-content-between">
-            <div class="col-xl-4 col-sm-6 col-lg-4">
-               <div class="single-footer-widget footer_1">
-                  <h4>About Us</h4>
-                  <p>Do you want to be even more successful? Learn to love learning and growth.
-                     The more effort you put into improving your skills, the bigger the payoff you
-                     will get. Realize that things </p>
-                  <p class="mt-3">The more effort you put into improving your skills, the bigger the stil now</p>
-               </div>
-            </div>
-            <div class="col-xl-3 col-sm-6 col-lg-4">
-               <div class="single-footer-widget footer_2">
-                  <h4>Contact us</h4>
-                  <div >
-                     
-                     <h5>Los angeles, United States</h5>
-                     <p>659, Rocky beach bullevard, santa monica, Rocky beach, USA.</p>
-                  </div>
-                  <div>
-                     
-                     <h5>+44 6532 986 652</h5>
-                     <p>Mon to Fri 9am to 6 pm.</p>
-                  </div>
-               </div>
-            </div>
-
-            <div class="col-xl-4 col-sm-8 col-lg-4">
-               <div class="single-footer-widget footer_3">
-                  <h4>Newsletter</h4>
-                  <p>Stay updated with our latest trends The more effort you put into improving your skills, the bigger
-                     the payoff you will get realize that things.</p>
-                  </br>
-               </div><div class="copyright_social_icon">
-                                    <a href="#"> <i class="ti-facebook"></i> </a>
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-xl-4 col-sm-6 col-lg-4">
+                    <div class="single-footer-widget footer_1">
+                        <h4>About</h4>
+                        <p>
+my_realms is not just a platform for you to showcase your talent, it is a community where people can communicate with like-minded ones. The very name of my_realms defines a space made for you to explore and illustrate yourself. </p>
+                        <p class="mt-3" ></p>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-sm-6 col-lg-4">
+                    <div class="single-footer-widget footer_2">
+                        <h4>    Contact us</h4>
+                        <div >
+                            
+                            <h5>Mail us at</h5>
+                            <p>my.realms.44@gmail.com</p>
+                        </br>
+                        </div>
+                        <div >
+                            <h5>Text us at</h5>
+                            <h5>+91 8617028221 </h5>
+                            <h5>+91 9007541109 </h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-xl-4 col-sm-8 col-lg-4">
+                    <div class="single-footer-widget footer_3">
+                        <h4>Our pages</h4>
+                        <p>Get connected to the my_realms world where you can meet new people and share your views.</p>
+                        </br>
+                    </div>
+                    
+                    <div class="copyright_social_icon">
+                                    <a href="https://www.facebook.com/my_realms-926172701062222/"> <i class="ti-facebook"></i> </a>
                                    
-                                    <a href="#"> <i class="ti-instagram"></i> </a>
-                                    <a href="#"> <i class="ti-youtube"></i> </a>
+                                    
+                                    <a href="https://www.youtube.com/channel/UClJu9fFdPhwNGCmq4gg47bQ"> <i class="ti-youtube"></i> </a>
+
+                                    <a href="https://www.instagram.com/my_realms_writes/?hl=en"> <i class="ti-instagram"></i> </a>
+                                    <a href="https://www.instagram.com/my_realms_clicks/?hl=en"> <i class="ti-instagram"></i> </a>
+                                    <a href="https://www.instagram.com/my_realms_art/?hl=en"> <i class="ti-instagram"></i> </a>
                                     
                                 </div>
-               
+                           
+                </div>
             </div>
-         </div>
-      </div>
-      <div class="copyright_part">
-         <div class="container-fluid">
-            <div class="row">
-               <div class="col-lg-12 text-center">
-                  <p class="footer-text m-0">
+        </div>
+        <div class="copyright_part">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <p class="footer-text m-0 text-white">
 Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | my_realms <i class="fa fa-heart-o" aria-hidden="true"></i> 
-               </div>
+</p>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-   </footer>
+        </div>
+    </footer>
    <!-- footer part end-->
 
    <!-- jquery plugins here-->
