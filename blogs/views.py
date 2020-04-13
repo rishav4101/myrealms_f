@@ -22,7 +22,7 @@ def team(request):
 
 def allPosts(request):
     allPosts = Post.objects.order_by('-timestamp')
-    paginator = Paginator(allPosts, 5)
+    paginator = Paginator(allPosts, 10)
     page = request.GET.get('page', 1)
     try:
         posts = paginator.page(page)
