@@ -92,7 +92,7 @@
                     <div class="blog_left_sidebar">
                         <article class="blog_item">
                             <div class="blog_item_img">
-                                <img class="card-img rounded-0" src="{{post.image.url}}" alt="">
+                                <img class="card-img rounded-0" src="{{post.image}}" alt="">
                                 <a class="blog_item_date">
                                     <p>{{post.timestamp}}</p>
                                 </a>
@@ -105,7 +105,7 @@
                                 <!-- <p>By {{post.created_by}}</p> -->
                                 <ul class="blog-info-link">
                                     <li><a><i class="far "></i>{{post.category1}},{{post.category2}}</a></li>
-                                    <li><a><i class="far "></i>{{post.views}} Views</a></li>
+                                    <!-- <li><a><i class="far "></i>{{post.views}} Views</a></li> -->
                                     <li><a><i class="far "></i>By {{post.created_by}}</a></li>
                                 </ul>
                             </div>
@@ -223,11 +223,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{% static 'js/gijgo.min.js' %}"></script>
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <!-- contact js -->
-    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <!-- <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
     <script src="{% static 'js/jquery.form.js' %}"></script>
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
-    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script> -->
     <!-- custom js -->
     <script src="{% static 'js/custom.js' %}"></script>
     <script src="{% static 'js/3.js' %}"></script>

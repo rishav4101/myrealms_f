@@ -226,7 +226,7 @@ my_realms tries to involve these different definitions into it's one unified com
                 {% for post in posts %}
                 <div class="col-md-6 col-lg-4">
                     <div class="single_service_part">
-                        <img src="{{ post.image.url }}" alt="">
+                        <img src="{{ post.image }}" alt="">
                         <div class="single_service_text">
                             <p> <a>{{post.category1}},{{post.category2}}</a> <span>|</span>{{post.timestamp}}</p>
                             <h4 href="{% url 'view_post' post.id %}">{{post.title}}</h4>
@@ -326,11 +326,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{% static 'js/gijgo.min.js' %}"></script>
     <script src="{% static 'js/jquery.nice-select.min.js' %}"></script>
     <!-- contact js -->
-    <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+    <!-- <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
     <script src="{% static 'js/jquery.form.js' %}"></script>
     <script src="{% static 'js/jquery.validate.min.js' %}"></script>
     <script src="{% static 'js/mail-script.js' %}"></script>
-    <script src="{% static 'js/contact.js' %}"></script>
+    <script src="{% static 'js/contact.js' %}"></script> -->
     <!-- custom js -->
     <script src="{% static 'js/custom.js' %}"></script>
     <script src="{% static 'js/3.js' %}"></script>
