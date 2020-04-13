@@ -17,7 +17,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
-    body = models.TextField(max_length=10000)
+    body = models.TextField(max_length=1000)
     image = models.URLField(max_length=1000)
     active = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
