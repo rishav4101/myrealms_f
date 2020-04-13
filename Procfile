@@ -1,1 +1,1 @@
-web: gunicorn myRealms.wsgi --log-file -
+web: gunicorn myRealms.wsgi
