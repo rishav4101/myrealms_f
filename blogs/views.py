@@ -45,10 +45,10 @@ def view_post(request, post_id):
     except:
         prev_post = None
 
-    if not PostHits.objects.filter(post=post, session=request.session.session_key) :
-        view = PostHits(post=post, ip=request.META['REMOTE_ADDR'], timestamp=timezone.now(), session=request.session.session_key)
-        view.save()
-        post.increase()
+    # if not PostHits.objects.filter(post=post, session=request.session.session_key) :
+    #     view = PostHits(post=post, ip=request.META['REMOTE_ADDR'], timestamp=timezone.now(), session=request.session.session_key)
+    #     view.save()
+    #     post.increase()
     comments = post.comments.filter(active=True)
     comment_form = CommentForm()
     new_comment = None
